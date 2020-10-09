@@ -22,4 +22,58 @@ rotate 4 steps to the right: 2->0->1->NULL
 
 --------
 
-
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode rotateRight(ListNode head, int k) {
+         if(head==null)return null;
+        
+        int length=1;
+         ListNode tail=head;
+         while(tail.next!=null)
+         {             tail=tail.next;
+             length++;
+         }
+         tail.next=head;
+         
+            if(k>length)k=k%length;
+         
+         for(int i=0;i<length-k;i++)
+         {
+             tail=tail.next;
+         }
+        
+         ListNode nh=tail.next;
+         tail.next=null;
+         return nh;
+        
+        
+        
+		// if(head==null) return head;
+		// int len=1;
+		// ListNode tail=head;
+		// //calculate length
+		// while(tail.next!=null){
+		// tail=tail.next;
+		// len++;
+		// }
+		// tail.next=head; //loop back to root
+		// k%=len; //avoid unnecessary moves
+		// for(int i=0;i<len-k;i++){
+		// tail=tail.next;
+		// }
+		// ListNode NewHead=tail.next; //calculate new Head
+		// tail.next=null;
+		// return NewHead;
+    }
+    
+        
+}
