@@ -23,3 +23,28 @@ You may assume that all elements in nums are unique.
 n will be in the range [1, 10000].
 The value of each element in nums will be in the range [-9999, 9999].
 -----------
+
+
+class Solution {
+    public int search(int[] nums, int target) {
+        int l=0;
+        int r=nums.length-1;
+        int mid=0;
+        
+        while(l<=r)
+        {
+             mid=(l+r)/2;
+            if(nums[mid]==target)return mid;
+            else if(nums[mid]<target)
+            {
+                l++;
+            }
+            else{
+                r--;
+            }
+           
+            
+        }
+        return -1;
+    }
+}
