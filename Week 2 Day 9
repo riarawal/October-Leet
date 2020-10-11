@@ -24,3 +24,70 @@ Constraints:
 The number of nodes in the tree is in the range [0, 104].
 0 <= Node.val <= 104
 The input tree is guaranteed to be a binary search tree.
+
+---------
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Codec {
+
+    // Encodes a tree to a single string.
+//     public String serialize(TreeNode root) {
+        
+//     }
+
+//     // Decodes your encoded data to tree.
+//     public TreeNode deserialize(String data) {
+        
+//     }
+     private StringBuilder storage = new StringBuilder();
+    public void inOrder(TreeNode root){
+        if(root == null){
+            storage.append("*").append(",");
+            return;
+        }
+        storage.append(root.val).append(",");
+        inOrder(root.left);
+        inOrder(root.right);
+    }
+    public String serialize(TreeNode root) {
+        inOrder(root);
+        return storage.toString();
+    }
+    
+    public TreeNode deserialize(Queue<String>values){
+        String current = values.remove();
+        if(current.equals("*")){
+            return null;
+        }
+        TreeNode node = new TreeNode(Integer.parseInt(current));
+        node.left = deserialize(values);
+        node.right = deserialize(values);
+        return node;
+    }
+
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
+        Queue<String>fringe = new LinkedList<>();
+        String []stored = data.split(",");
+        for(String value : stored){
+            fringe.add(value);
+        }
+        return deserialize(fringe);
+    }
+}
+
+
+// Your Codec object will be instantiated and called as such:
+// Codec ser = new Codec();
+// Codec deser = new Codec();
+// String tree = ser.serialize(root);
+// TreeNode ans = deser.deserialize(tree);
+// return ans;
