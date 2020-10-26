@@ -1,2 +1,2 @@
 # October-Leet
-first 10 days
+1st-10th October
